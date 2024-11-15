@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('follow_ups', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('role', ['Admin', 'Sales Manager', 'Sales Rep']);
-            $table->rememberToken();
+            $table->unsignedBigInteger('lead_id');
+            $table->timestamp('scheduled_at');
+            $table->enum('status', ['Pending', 'Completed', 'Missed']);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('follow_ups');
     }
 };
