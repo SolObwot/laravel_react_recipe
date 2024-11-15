@@ -10,6 +10,16 @@ class FollowUp extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['lead_id', 'scheduled_at', 'status'];
+
+    const STATUS_PENDING = 'Pending';
+    const STATUS_COMPLETED = 'Completed';
+    const STATUS_MISSED = 'Missed';
+
+    protected $casts = [
+        'scheduled_at' => 'datetime'
+    ];
+
     public function lead(): BelongsTo
     {
         return $this->belongsTo(Lead::class);
