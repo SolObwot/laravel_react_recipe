@@ -19,4 +19,10 @@ class LeadsApiController extends Controller
 
         return response()->json($lead, Response::HTTP_CREATED);
     }
+
+    public function index()
+    {
+        $leads = Lead::with('followUps')->get();
+        return response()->json($leads);
+    }
 }
